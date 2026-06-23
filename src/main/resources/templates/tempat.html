@@ -1,100 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Daftar Tempat</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Tempat Nongkrong - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<div class="navbar">
+    <!-- NAVBAR -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">Nongkrong<span class="text-amber-500">Finder</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="/dashboard" class="hover:text-amber-500 transition-colors">Dashboard</a>
+                <a href="/tempat" class="text-amber-500 transition-colors">Tempat</a>
+                <a href="/favorit" class="hover:text-amber-500 transition-colors">Favorit</a>
+                <a href="/event" class="hover:text-amber-500 transition-colors">Event</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/logout" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
 
-    <a href="/dashboard">Dashboard</a>
-
-    <a href="/tempat">Tempat</a>
-
-    <a href="/favorit">Favorit</a>
-
-    <a href="/event">Event</a>
-
-    <a href="/logout">Logout</a>
-
-</div>
-
-<div class="container">
-
-    <div class="card">
-
-        <h1 class="title">
-            ☕ Daftar Tempat Nongkrong
-        </h1>
-
-        <p>
-            Temukan dan kelola tempat nongkrong favoritmu.
-        </p>
-
-        <br>
-
-        <a class="btn" href="/tempat/tambah">
-            ➕ Tambah Tempat
-        </a>
-
-    </div>
-
-    <br>
-
-    <div th:each="tempat : ${tempatList}" class="card">
-
-        <h2 th:text="${tempat.nama_tempat}">
-            Nama Tempat
-        </h2>
-
-        <p>
-            📍
-            <span th:text="${tempat.alamat}"></span>
-        </p>
-
-        <p>
-            📂
-            <span th:text="${tempat.kategori}"></span>
-        </p>
-
-        <br>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-
-            <a class="btn"
-               th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}">
-                🔍 Detail
+    <!-- MAIN KONTEN -->
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+        
+        <!-- HEADER HALAMAN -->
+        <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">☕ Daftar Tempat Nongkrong</h1>
+                <p class="text-sm text-gray-500 mt-1">Temukan, kelola, dan eksplorasi tempat nongkrong favoritmu di sekitarmu.</p>
+            </div>
+            <a href="/tempat/tambah" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-amber-500/20 text-sm flex items-center gap-2 shrink-0">
+                <i class="fa-solid fa-plus"></i> Tambah Tempat Baru
             </a>
-
-            <a class="btn"
-               th:href="@{'/tempat/edit/' + ${tempat.id_tempat}}">
-                ✏️ Edit
-            </a>
-
-            <a class="btn"
-               th:href="@{'/review/' + ${tempat.id_tempat}}">
-                ⭐ Review
-            </a>
-
-            <a class="btn"
-               th:href="@{'/favorit/tambah/' + ${tempat.id_tempat}}">
-                ❤️ Favorit
-            </a>
-
-            <a class="btn"
-               th:href="@{'/tempat/hapus/' + ${tempat.id_tempat}}">
-                🗑️ Hapus
-            </a>
-
         </div>
 
-    </div>
+        <!-- GRID LIST TEMPAT -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loop Data Tempat -->
+            <div th:each="tempat : ${tempatList}" class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                
+                <!-- Foto & Badge Kategori -->
+                <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
+                    <img th:src="${tempat.foto != null && !tempat.foto.isEmpty() ? tempat.foto : 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=500'}" alt="Foto Tempat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-gray-900 px-3 py-1 rounded-lg text-xs font-bold shadow-sm" th:text="${tempat.kategori}">Cafe</span>
+                    
+                    <!-- Tombol Favorit -->
+                    <a th:href="@{'/favorit/tambah/' + ${tempat.id_tempat}}" class="absolute top-4 right-4 w-9 h-9 bg-white/90 backdrop-blur-md text-gray-400 hover:text-red-500 rounded-full flex items-center justify-center shadow-sm transition-colors">
+                        <i class="fa-solid fa-heart text-sm"></i>
+                    </a>
+                </div>
 
-</div>
+                <!-- Konten Informasi -->
+                <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-1 text-amber-500 text-xs font-bold">
+                            <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                            <span class="text-gray-400 font-medium ml-1">(4.8)</span>
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-lg leading-snug hover:text-amber-500 transition-colors">
+                            <a th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}" th:text="${tempat.nama_tempat}">Nama Tempat</a>
+                        </h3>
+                        <p class="text-sm text-gray-500 flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-amber-500 text-xs"></i> <span th:text="${tempat.alamat}">Alamat</span></p>
+                    </div>
+
+                    <!-- Tombol Aksi / Manage -->
+                    <div class="pt-4 border-t border-gray-100 grid grid-cols-3 gap-2">
+                        <a th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}" class="bg-gray-50 hover:bg-amber-50 text-gray-700 hover:text-amber-600 py-2 rounded-lg text-xs font-semibold text-center transition-colors">
+                            <i class="fa-solid fa-magnifying-glass mr-1"></i> Detail
+                        </a>
+                        <a th:href="@{'/tempat/edit/' + ${tempat.id_tempat}}" class="bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-600 py-2 rounded-lg text-xs font-semibold text-center transition-colors">
+                            <i class="fa-solid fa-pen mr-1"></i> Edit
+                        </a>
+                        <a th:href="@{'/review/' + ${tempat.id_tempat}}" class="bg-gray-50 hover:bg-yellow-50 text-gray-700 hover:text-yellow-600 py-2 rounded-lg text-xs font-semibold text-center transition-colors">
+                            <i class="fa-solid fa-star mr-1"></i> Review
+                        </a>
+                    </div>
+                    
+                    <!-- Tombol Hapus (Dipisah agar rapi) -->
+                    <a th:href="@{'/tempat/hapus/' + ${tempat.id_tempat}}" onclick="return confirm('Apakah Anda yakin ingin menghapus tempat ini?')" class="w-full bg-red-50 hover:bg-red-500 text-red-600 hover:text-white py-2 rounded-lg text-xs font-semibold text-center transition-all block">
+                        <i class="fa-solid fa-trash mr-1"></i> Hapus Tempat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
+            &copy; 2026 NongkrongFinder. All rights reserved.
+        </div>
+    </footer>
 
 </body>
 </html>

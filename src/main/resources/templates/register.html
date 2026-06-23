@@ -1,45 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Akun - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 flex items-center justify-center min-h-screen p-4">
 
-<div class="container">
+    <div class="max-w-md w-full bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+        
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-xl mx-auto shadow-lg shadow-amber-500/20">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900">Daftar Akun Baru</h1>
+            <p class="text-sm text-gray-400">Gabung bersama komunitas dan temukan tempat terbaikmu.</p>
+        </div>
 
-    <div class="card">
+        <!-- Form -->
+        <form action="/register" method="post" class="space-y-4">
+            <div class="space-y-1.5">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Nama Lengkap</label>
+                <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                    <i class="fa-solid fa-user absolute left-4 text-sm"></i>
+                    <input type="text" name="nama" required placeholder="Masukkan nama lengkap" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                </div>
+            </div>
 
-        <h1 class="title">
-            Daftar Akun Baru
-        </h1>
+            <div class="space-y-1.5">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Email Address</label>
+                <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                    <i class="fa-solid fa-envelope absolute left-4 text-sm"></i>
+                    <input type="email" name="email" required placeholder="nama@email.com" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                </div>
+            </div>
 
-        <form action="/register" method="post">
+            <div class="space-y-1.5">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Password</label>
+                <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                    <i class="fa-solid fa-lock absolute left-4 text-sm"></i>
+                    <input type="password" name="password" required placeholder="••••••••" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                </div>
+            </div>
 
-            <label>Nama</label>
-            <input type="text" name="nama" required>
-
-            <label>Email</label>
-            <input type="email" name="email" required>
-
-            <label>Password</label>
-            <input type="password" name="password" required>
-
-            <button class="btn" type="submit">
-                Register
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-amber-500/20 text-sm mt-2">
+                Daftar Akun
             </button>
-
         </form>
 
-        <br>
-
-        <a href="/login">
-            Sudah punya akun?
-        </a>
-
+        <!-- Pindah Halaman -->
+        <div class="text-center pt-2 border-t border-gray-100">
+            <p class="text-sm text-gray-500">Sudah memiliki akun? <a href="/login" class="text-amber-500 font-bold hover:underline">Log In</a></p>
+        </div>
     </div>
-
-</div>
 
 </body>
 </html>

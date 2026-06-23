@@ -1,66 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Favorit Saya</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorit Saya - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<div class="navbar">
+    <!-- NAVBAR -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">Nongkrong<span class="text-amber-500">Finder</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="/dashboard" class="hover:text-amber-500 transition-colors">Dashboard</a>
+                <a href="/tempat" class="hover:text-amber-500 transition-colors">Tempat</a>
+                <a href="/favorit" class="text-amber-500 transition-colors">Favorit</a>
+                <a href="/event" class="hover:text-amber-500 transition-colors">Event</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/logout" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
 
-    <a href="/dashboard">Dashboard</a>
+    <!-- MAIN BODY -->
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
+            
+            <!-- Title -->
+            <div class="p-6 border-b border-gray-100">
+                <h1 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-red-500"></i> Tempat Favorit Saya
+                </h1>
+                <p class="text-xs text-gray-400 mt-0.5">Daftar tempat nongkrong yang sudah kamu simpan ke akun pribadi.</p>
+            </div>
 
-    <a href="/tempat">Tempat</a>
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-left text-sm text-gray-500">
+                    <thead class="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-4">ID</th>
+                            <th scope="col" class="px-6 py-4">Nama Tempat</th>
+                            <th scope="col" class="px-6 py-4">Alamat</th>
+                            <th scope="col" class="px-6 py-4 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                        <tr th:each="favorit : ${favoritList}" class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-semibold text-gray-900" th:text="${favorit.id_favorit}"></td>
+                            <td class="px-6 py-4 font-bold text-gray-800" th:text="${favorit.tempat.nama_tempat}"></td>
+                            <td class="px-6 py-4 text-gray-500" th:text="${favorit.tempat.alamat}"></td>
+                            <td class="px-6 py-4 text-center">
+                                <a th:href="@{'/favorit/hapus/' + ${favorit.id_favorit}}" onclick="return confirm('Hapus dari favorit?')" class="bg-red-50 hover:bg-red-500 text-red-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-trash-can text-[11px]"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <a href="/favorit">Favorit</a>
-
-    <a href="/event">Event</a>
-
-</div>
-
-<div class="container">
-
-    <div class="card">
-
-        <h1 class="title">
-            ❤️ Favorit Saya
-        </h1>
-
-        <table>
-
-            <tr>
-                <th>ID</th>
-                <th>Nama Tempat</th>
-                <th>Alamat</th>
-                <th>Aksi</th>
-            </tr>
-
-            <tr th:each="favorit : ${favoritList}">
-
-                <td th:text="${favorit.id_favorit}"></td>
-
-                <td th:text="${favorit.tempat.nama_tempat}"></td>
-
-                <td th:text="${favorit.tempat.alamat}"></td>
-
-                <td>
-
-                    <a th:href="@{'/favorit/hapus/' + ${favorit.id_favorit}}">
-                        Hapus
-                    </a>
-
-                </td>
-
-            </tr>
-
-        </table>
-
-    </div>
-
-</div>
+        </div>
+    </main>
 
 </body>
 </html>

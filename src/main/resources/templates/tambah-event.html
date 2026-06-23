@@ -1,48 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>Tambah Event</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Event Baru - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
 
-<div class="container">
+    <div class="max-w-xl w-full mx-auto my-12 px-4 flex-1 flex flex-col justify-center">
+        <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+            
+            <!-- HEADER -->
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-xl mx-auto shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Tambah Event Baru</h1>
+                <p class="text-sm text-gray-400">Buat acara seru, ajak teman baru berkumpul bersama.</p>
+            </div>
 
-    <div class="card">
+            <!-- FORM -->
+            <form action="/event/simpan" method="post" class="space-y-4">
+                
+                <!-- Nama Event -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Nama Event</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-bullhorn absolute left-4 text-sm"></i>
+                        <input type="text" name="nama_event" required placeholder="Contoh: Ngopi Bareng UI/UX" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-        <h1 class="title">
-            Tambah Event Baru
-        </h1>
+                <!-- Lokasi -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Lokasi Acara</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-map-location-dot absolute left-4 text-sm"></i>
+                        <input type="text" name="lokasi" required placeholder="Contoh: Kopi Tuku Purwokerto" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-        <form action="/event/simpan" method="post">
+                <!-- Maksimal Peserta & Status Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Maks Peserta</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                            <i class="fa-solid fa-users absolute left-4 text-sm"></i>
+                            <input type="number" name="maks_peserta" placeholder="50" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Status</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                            <i class="fa-solid fa-info-circle absolute left-4 text-sm"></i>
+                            <input type="text" name="status" placeholder="Contoh: BUKA" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                </div>
 
-            <label>Nama Event</label>
-            <input type="text" name="nama_event">
+                <!-- Deskripsi -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Deskripsi Event</label>
+                    <textarea name="deskripsi" rows="3" placeholder="Tulis rincian rundown atau agenda kumpul..." class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 p-4 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all"></textarea>
+                </div>
 
-            <label>Deskripsi</label>
-            <textarea name="deskripsi"></textarea>
+                <!-- Button Submit -->
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-amber-500/20 text-sm mt-2">
+                    Simpan & Publikasikan Event
+                </button>
+            </form>
 
-            <label>Lokasi</label>
-            <input type="text" name="lokasi">
-
-            <label>Maks Peserta</label>
-            <input type="number" name="maks_peserta">
-
-            <label>Status</label>
-            <input type="text" name="status">
-
-            <button class="btn" type="submit">
-                Simpan Event
-            </button>
-
-        </form>
-
+            <div class="text-center pt-2">
+                <a href="/event" class="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                    Kembali
+                </a>
+            </div>
+        </div>
     </div>
-
-</div>
 
 </body>
 </html>

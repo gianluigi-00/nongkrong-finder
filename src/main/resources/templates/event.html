@@ -1,75 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Daftar Event</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Event - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<div class="navbar">
+    <!-- NAVBAR -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">Nongkrong<span class="text-amber-500">Finder</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="/dashboard" class="hover:text-amber-500 transition-colors">Dashboard</a>
+                <a href="/tempat" class="hover:text-amber-500 transition-colors">Tempat</a>
+                <a href="/favorit" class="hover:text-amber-500 transition-colors">Favorit</a>
+                <a href="/event" class="text-amber-500 transition-colors">Event</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/logout" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
 
-    <a href="/dashboard">Dashboard</a>
-
-    <a href="/tempat">Tempat</a>
-
-    <a href="/favorit">Favorit</a>
-
-    <a href="/event">Event</a>
-
-</div>
-
-<div class="container">
-
-    <div class="card">
-
-        <h1 class="title">
-            🎉 Daftar Event Nongkrong
-        </h1>
-
-        <p class="subtitle">
-            Temukan dan ikuti event nongkrong yang sedang berlangsung.
-        </p>
-
-        <a class="btn" href="/event/tambah">
-            ➕ Tambah Event
-        </a>
-
-    </div>
-
-    <div th:each="event : ${eventList}" class="card">
-
-        <h2 th:text="${event.nama_event}"></h2>
-
-        <p>
-            📍
-            <span th:text="${event.lokasi}"></span>
-        </p>
-
-        <p>
-            📢 Status :
-            <strong th:text="${event.status}"></strong>
-        </p>
-
-        <div style="margin-top:15px;">
-
-            <a class="btn"
-               th:href="@{'/event/join/' + ${event.id_event}}">
-                🙋 Join Event
+    <!-- CONTENT BODY -->
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-8">
+        
+        <!-- HEADER HALAMAN -->
+        <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">🎉 Daftar Event Nongkrong</h1>
+                <p class="text-sm text-gray-500 mt-1">Temukan, buat, atau ikuti keseruan event komunitas mingguan di sekitarmu.</p>
+            </div>
+            <a href="/event/tambah" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-amber-500/20 text-sm flex items-center gap-2 shrink-0">
+                <i class="fa-solid fa-calendar-plus"></i> Buat Event Baru
             </a>
-
-            <a class="btn"
-               th:href="@{'/event/peserta/' + ${event.id_event}}">
-                👥 Peserta
-            </a>
-
         </div>
 
-    </div>
+        <!-- GRID LIST ACARA -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Loop Event -->
+            <div th:each="event : ${eventList}" class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex gap-5 items-start relative hover:shadow-md transition-shadow">
+                
+                <!-- Badge Tanggal Kiri -->
+                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex flex-col items-center justify-center shrink-0 border border-amber-100 text-amber-600">
+                    <span class="text-lg font-bold leading-none">28</span>
+                    <span class="text-[10px] font-bold uppercase mt-1 tracking-wider">Jun</span>
+                </div>
 
-</div>
+                <!-- Detail Event -->
+                <div class="space-y-3 flex-1">
+                    <div>
+                        <span class="inline-block px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-lg text-[10px] font-bold uppercase tracking-wider mb-1.5" th:text="${event.status}">Active</span>
+                        <h3 class="font-bold text-gray-900 text-lg leading-snug" th:text="${event.nama_event}">Nama Event</h3>
+                    </div>
+                    
+                    <p class="text-sm text-gray-500 line-clamp-2" th:text="${event.deskripsi}">Deskripsi event disini...</p>
+                    
+                    <div class="flex flex-wrap gap-y-2 gap-x-4 text-xs text-gray-400 font-medium pt-1">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-amber-500"></i> <span th:text="${event.lokasi}">Lokasi</span></span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-users text-gray-400"></i> Max <span th:text="${event.maks_peserta}">-</span> Orang</span>
+                    </div>
+
+                    <!-- Tombol Join / Lihat Peserta -->
+                    <div class="pt-3 flex justify-between items-center border-t border-gray-50">
+                        <div class="flex gap-2">
+                            <a th:href="@{'/event/join/' + ${event.id_event}}" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors">
+                                <i class="fa-solid fa-right-to-bracket mr-1"></i> Join
+                            </a>
+                            <a th:href="@{'/event/peserta/' + ${event.id_event}}" class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors">
+                                <i class="fa-solid fa-user-group mr-1"></i> Peserta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 </body>
 </html>

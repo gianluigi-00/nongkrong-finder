@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Review Tempat</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Tempat - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 py-10">
 
-<div class="container">
+    <div class="max-w-3xl mx-auto px-4 space-y-8">
+        
+        <!-- CARD INPUT FORM -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Ulasan Komunitas</span>
+                <h1 class="text-2xl font-extrabold text-gray-900 mt-1" th:text="${tempat.nama_tempat}">Nama Tempat</h1>
+            </div>
 
-    <div class="card">
-
-        <h1 class="title"
-            th:text="${tempat.nama_tempat}">
-        </h1>
-
-        <h2>Tambah Review</h2>
-
-        <form th:action="@{'/review/simpan/' + ${tempat.id_tempat}}"
-              method="post">
-
-            <label>Rating</label>
-
-            <input type="number"
-                   min="1"
-                   max="5"
-                   name="rating">
-
-            <label>Komentar</label>
-
-            <textarea name="komentar"></textarea>
-
-            <button class="btn" type="submit">
-                Kirim Review
-            </button>
-
-        </form>
-
-        <br><br>
-
-        <h2>Daftar Review</h2>
-
-        <div th:each="review : ${reviewList}">
-
-            <b>⭐ Rating :</b>
-            <span th:text="${review.rating}"></span>
-
-            <br><br>
-
-            <b>Komentar :</b>
-            <span th:text="${review.komentar}"></span>
-
-            <hr>
-
+            <!-- Form -->
+            <form th:action="@{'/review/simpan/' + ${tempat.id_tempat}}" method="post" class="space-y-4 pt-4 border-t border-gray-100">
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Berikan Rating (1-5)</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-star absolute left-4 text-sm"></i>
+                        <input type="number" min="1" max="5" name="rating" required placeholder="5" class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Komentar / Ulasan</label>
+                    <textarea name="komentar" rows="3" required placeholder="Bagaimana suasana, wifi, dan rasa kopi disini?..." class="w-full bg-gray-50 text-gray-800 p-4 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all"></textarea>
+                </div>
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-amber-500/20">
+                    Kirim Review Jujur
+                </button>
+            </form>
         </div>
 
-    </div>
+        <!-- LIST FEEDBACK REVIEW -->
+        <div class="space-y-4">
+            <h2 class="text-lg font-bold text-gray-900 px-2">Semua Review Komunitas</h2>
+            
+            <!-- Loop Review -->
+            <div th:each="review : ${reviewList}" class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold text-xs" th:text="${#strings.substring(review.user != null ? review.user.nama : 'U',0,1)}"></div>
+                        <div>
+                            <h4 class="font-bold text-sm text-gray-900" th:text="${review.user != null ? review.user.nama : 'User'}">Nama User</h4>
+                            <p class="text-[10px] text-gray-400 font-medium">Terverifikasi</p>
+                        </div>
+                    </div>
+                    <!-- Rating Badge -->
+                    <div class="bg-amber-50 text-amber-600 px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-star"></i> <span th:text="${review.rating}">5</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed italic pt-1" th:text="'&ldquo;' + ${review.komentar} + '&rdquo;'"></p>
+            </div>
+        </div>
 
-</div>
+        <div class="text-center">
+            <a th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}" class="text-sm font-semibold text-gray-400 hover:text-gray-600">← Kembali ke Detail</a>
+        </div>
+    </div>
 
 </body>
 </html>

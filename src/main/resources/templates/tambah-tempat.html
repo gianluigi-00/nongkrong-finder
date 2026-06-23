@@ -1,60 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tambah Tempat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Tempat Baru - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
 
-<h1>Tambah Tempat Nongkrong</h1>
+    <div class="max-w-xl w-full mx-auto my-12 px-4 flex-1 flex flex-col justify-center">
+        <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+            
+            <!-- HEADER FORM -->
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-xl mx-auto shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Tambah Tempat Nongkrong</h1>
+                <p class="text-sm text-gray-400">Masukkan detail tempat nongkrong baru agar bisa dieksplorasi komunitas.</p>
+            </div>
 
-<form action="/tempat/simpan" method="post">
+            <!-- FORM ACTION -->
+            <form action="/tempat/simpan" method="post" class="space-y-4">
+                
+                <!-- Nama Tempat -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Nama Tempat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-store absolute left-4 text-sm"></i>
+                        <input type="text" name="nama_tempat" required placeholder="Contoh: Kopi Tuku Purwokerto" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-    <label>Nama Tempat</label>
-    <br>
-    <input type="text" name="nama_tempat" required>
-    <br><br>
+                <!-- Alamat -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Alamat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-location-dot absolute left-4 text-sm"></i>
+                        <input type="text" name="alamat" required placeholder="Contoh: Jl. Merdeka No. 12" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-    <label>Alamat</label>
-    <br>
-    <input type="text" name="alamat" required>
-    <br><br>
+                <!-- Kategori -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Kategori</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-tags absolute left-4 text-sm"></i>
+                        <input type="text" name="kategori" placeholder="Contoh: Cafe / Coworking Space" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-    <label>Deskripsi</label>
-    <br>
-    <textarea name="deskripsi"></textarea>
-    <br><br>
+                <!-- Jam Operasional Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Jam Buka</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                            <i class="fa-solid fa-clock absolute left-4 text-sm"></i>
+                            <input type="text" name="jam_buka" placeholder="09:00" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Jam Tutup</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                            <i class="fa-solid fa-circle-xmark absolute left-4 text-sm"></i>
+                            <input type="text" name="jam_tutup" placeholder="22:00" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                </div>
 
-    <label>Kategori</label>
-    <br>
-    <input type="text" name="kategori">
-    <br><br>
+                <!-- URL Foto -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">URL Foto Tempat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-amber-500">
+                        <i class="fa-solid fa-image absolute left-4 text-sm"></i>
+                        <input type="text" name="foto" placeholder="https://link-foto-anda.com/gambar.jpg" class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-    <label>Jam Buka</label>
-    <br>
-    <input type="text" name="jam_buka">
-    <br><br>
+                <!-- Deskripsi -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Deskripsi</label>
+                    <textarea name="deskripsi" rows="3" placeholder="Ceritakan suasana, fasilitas wifi, colokan, dll..." class="w-full bg-gray-50 text-gray-800 placeholder-gray-400 p-4 rounded-xl border border-gray-100 focus:border-amber-500 focus:bg-white focus:outline-none font-medium text-sm transition-all"></textarea>
+                </div>
 
-    <label>Jam Tutup</label>
-    <br>
-    <input type="text" name="jam_tutup">
-    <br><br>
+                <!-- Button Submit -->
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-amber-500/20 text-sm mt-2">
+                    Simpan Tempat
+                </button>
+            </form>
 
-    <label>Foto</label>
-    <br>
-    <input type="text" name="foto">
-    <br><br>
-
-    <button type="submit">
-        Simpan Tempat
-    </button>
-
-</form>
-
-<br>
-
-<a href="/tempat">
-    Lihat Semua Tempat
-</a>
+            <!-- Kembali -->
+            <div class="text-center pt-2">
+                <a href="/tempat" class="text-sm font-semibold text-gray-500 hover:text-amber-500 transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-1.5"></i> Kembali ke Semua Tempat
+                </a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

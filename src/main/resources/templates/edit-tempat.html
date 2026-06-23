@@ -1,72 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Edit Tempat</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Tempat Nongkrong - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
 
-<div class="container">
+    <div class="max-w-xl w-full mx-auto my-12 px-4 flex-1 flex flex-col justify-center">
+        <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+            
+            <!-- HEADER EDIT -->
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-xl mx-auto shadow-lg shadow-blue-500/20">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Edit Tempat Nongkrong</h1>
+                <p class="text-sm text-gray-400">Perbarui data atau informasi lama tempat nongkrong ini.</p>
+            </div>
 
-    <div class="card">
+            <!-- FORM UPDATE -->
+            <form action="/tempat/update" method="post" class="space-y-4">
+                
+                <!-- Hidden Input ID -->
+                <input type="hidden" name="id_tempat" th:value="${tempat.id_tempat}">
 
-        <h1 class="title">
-            Edit Tempat Nongkrong
-        </h1>
+                <!-- Nama Tempat -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Nama Tempat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                        <i class="fa-solid fa-store absolute left-4 text-sm"></i>
+                        <input type="text" name="nama_tempat" th:value="${tempat.nama_tempat}" required class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-        <form action="/tempat/update" method="post">
+                <!-- Alamat -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Alamat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                        <i class="fa-solid fa-location-dot absolute left-4 text-sm"></i>
+                        <input type="text" name="alamat" th:value="${tempat.alamat}" required class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-            <input type="hidden"
-                   name="id_tempat"
-                   th:value="${tempat.id_tempat}">
+                <!-- Kategori -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Kategori</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                        <i class="fa-solid fa-tags absolute left-4 text-sm"></i>
+                        <input type="text" name="kategori" th:value="${tempat.kategori}" class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-            <label>Nama Tempat</label>
-            <input type="text"
-                   name="nama_tempat"
-                   th:value="${tempat.nama_tempat}">
+                <!-- Jam Operasional Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Jam Buka</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                            <i class="fa-solid fa-clock absolute left-4 text-sm"></i>
+                            <input type="text" name="jam_buka" th:value="${tempat.jam_buka}" class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Jam Tutup</label>
+                        <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                            <i class="fa-solid fa-circle-xmark absolute left-4 text-sm"></i>
+                            <input type="text" name="jam_tutup" th:value="${tempat.jam_tutup}" class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                        </div>
+                    </div>
+                </div>
 
-            <label>Alamat</label>
-            <input type="text"
-                   name="alamat"
-                   th:value="${tempat.alamat}">
+                <!-- Foto URL -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">URL Foto Tempat</label>
+                    <div class="relative flex items-center text-gray-400 focus-within:text-blue-500">
+                        <i class="fa-solid fa-image absolute left-4 text-sm"></i>
+                        <input type="text" name="foto" th:value="${tempat.foto}" class="w-full bg-gray-50 text-gray-800 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all">
+                    </div>
+                </div>
 
-            <label>Deskripsi</label>
-            <textarea name="deskripsi"
-                      th:text="${tempat.deskripsi}">
-            </textarea>
+                <!-- Deskripsi -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Deskripsi</label>
+                    <textarea name="deskripsi" rows="3" th:text="${tempat.deskripsi}" class="w-full bg-gray-50 text-gray-800 p-4 rounded-xl border border-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none font-medium text-sm transition-all"></textarea>
+                </div>
 
-            <label>Kategori</label>
-            <input type="text"
-                   name="kategori"
-                   th:value="${tempat.kategori}">
+                <!-- Button Submit -->
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20 text-sm mt-2">
+                    Update Tempat
+                </button>
+            </form>
 
-            <label>Jam Buka</label>
-            <input type="text"
-                   name="jam_buka"
-                   th:value="${tempat.jam_buka}">
-
-            <label>Jam Tutup</label>
-            <input type="text"
-                   name="jam_tutup"
-                   th:value="${tempat.jam_tutup}">
-
-            <label>Foto</label>
-            <input type="text"
-                   name="foto"
-                   th:value="${tempat.foto}">
-
-            <button class="btn" type="submit">
-                Update Tempat
-            </button>
-
-        </form>
-
+            <!-- Batal -->
+            <div class="text-center pt-2">
+                <a href="/tempat" class="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                    Batal & Kembali
+                </a>
+            </div>
+        </div>
     </div>
-
-</div>
 
 </body>
 </html>

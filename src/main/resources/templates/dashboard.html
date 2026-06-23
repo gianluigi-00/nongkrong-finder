@@ -1,140 +1,138 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Nongkrong Finder</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NongkrongFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<div class="navbar">
-
-    <a href="/dashboard">Dashboard</a>
-
-    <a href="/tempat">Tempat</a>
-
-    <a href="/favorit">Favorit</a>
-
-    <a href="/event">Event</a>
-
-    <a href="/logout">Logout</a>
-
-</div>
-
-<div class="container">
-
-    <div class="hero">
-
-        <h1>☕ Nongkrong Finder</h1>
-
-        <p>
-            Temukan tempat nongkrong terbaik,
-            simpan favorit,
-            berikan review,
-            dan ikuti event menarik di sekitarmu.
-        </p>
-
-    </div>
-
-    <br>
-
-    <div class="card">
-
-        <h2>📊 Statistik Aplikasi</h2>
-
-        <br>
-
-        <div style="display:flex; gap:20px; flex-wrap:wrap;">
-
-            <div style="
-                background:#f8f9fa;
-                padding:20px;
-                border-radius:10px;
-                width:180px;
-                text-align:center;
-            ">
-
-                <h3>☕ Tempat</h3>
-
-                <h1 th:text="${jumlahTempat}"></h1>
-
+    <!-- NAVBAR (Disamakan persis dengan tempat.html) -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo Area -->
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">Nongkrong<span class="text-amber-500">Finder</span></span>
             </div>
-
-            <div style="
-                background:#f8f9fa;
-                padding:20px;
-                border-radius:10px;
-                width:180px;
-                text-align:center;
-            ">
-
-                <h3>❤️ Favorit</h3>
-
-                <h1 th:text="${jumlahFavorit}"></h1>
-
+            <!-- Menu Links -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="/dashboard" class="text-amber-500 transition-colors">Dashboard</a>
+                <a href="/tempat" class="hover:text-amber-500 transition-colors">Tempat</a>
+                <a href="/favorit" class="hover:text-amber-500 transition-colors">Favorit</a>
+                <a href="/event" class="hover:text-amber-500 transition-colors">Event</a>
             </div>
-
-            <div style="
-                background:#f8f9fa;
-                padding:20px;
-                border-radius:10px;
-                width:180px;
-                text-align:center;
-            ">
-
-                <h3>🎉 Event</h3>
-
-                <h1 th:text="${jumlahEvent}"></h1>
-
+            <!-- Logout Button -->
+            <div class="flex items-center gap-4">
+                <a href="/logout" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm">Logout</a>
             </div>
+        </div>
+    </nav>
 
-            <div style="
-                background:#f8f9fa;
-                padding:20px;
-                border-radius:10px;
-                width:180px;
-                text-align:center;
-            ">
-
-                <h3>⭐ Review</h3>
-
-                <h1 th:text="${jumlahReview}"></h1>
-
+    <!-- MAIN KONTEN -->
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+        
+        <!-- HERO WELCOME CARD -->
+        <div class="bg-slate-800 text-white p-8 md:p-10 rounded-3xl shadow-xl relative overflow-hidden">
+            <div class="absolute right-0 bottom-0 opacity-10 translate-x-10 translate-y-10 hidden md:block">
+                <i class="fa-solid fa-mug-hot text-[240px]"></i>
             </div>
-
+            <div class="relative z-10 max-w-2xl space-y-2">
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight flex items-center gap-3">
+                    ☕ Nongkrong Finder
+                </h1>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                    Selamat datang kembali! Temukan tempat nongkrong terbaik, pantau statistik sistem, 
+                    dan kelola event menarik di sekitarmu dengan mudah lewat panel dashboard ini.
+                </p>
+            </div>
         </div>
 
-    </div>
+        <!-- STATISTIK APLIKASI -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
+            <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-amber-500"></i> Statistik Sistem Konten
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card Tempat -->
+                <div class="bg-gray-50/60 p-6 rounded-2xl border border-gray-100 flex flex-col items-center justify-center text-center space-y-2 border-b-4 border-b-blue-500 hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-store text-blue-500"></i> Total Tempat
+                    </span>
+                    <h1 class="text-4xl font-black text-gray-900" th:text="${jumlahTempat}">0</h1>
+                </div>
 
-    <br>
+                <!-- Card Favorit -->
+                <div class="bg-gray-50/60 p-6 rounded-2xl border border-gray-100 flex flex-col items-center justify-center text-center space-y-2 border-b-4 border-b-red-500 hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-heart text-red-500"></i> Favorit Saya
+                    </span>
+                    <h1 class="text-4xl font-black text-gray-900" th:text="${jumlahFavorit}">0</h1>
+                </div>
 
-    <div class="card">
+                <!-- Card Event -->
+                <div class="bg-gray-50/60 p-6 rounded-2xl border border-gray-100 flex flex-col items-center justify-center text-center space-y-2 border-b-4 border-b-emerald-500 hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-calendar-days text-emerald-500"></i> Event Aktif
+                    </span>
+                    <h1 class="text-4xl font-black text-gray-900" th:text="${jumlahEvent}">0</h1>
+                </div>
 
-        <h2>⚡ Akses Cepat</h2>
+                <!-- Card Review -->
+                <div class="bg-gray-50/60 p-6 rounded-2xl border border-gray-100 flex flex-col items-center justify-center text-center space-y-2 border-b-4 border-b-amber-500 hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-amber-500"></i> Total Review
+                    </span>
+                    <h1 class="text-4xl font-black text-gray-900" th:text="${jumlahReview}">0</h1>
+                </div>
+            </div>
+        </div>
 
-        <br>
+        <!-- AKSES CEPAT NAVIGASI -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+            <div>
+                <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-500"></i> Akses Cepat Navigasi
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Kelola data aplikasi secara instan melalui pintasan menu di bawah ini:</p>
+            </div>
 
-        <a class="btn" href="/tempat">
-            ☕ Kelola Tempat
-        </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
+                <a href="/tempat" class="flex items-center justify-center gap-2 bg-gray-50 hover:bg-amber-500 border border-gray-100 hover:border-amber-500 text-gray-700 hover:text-white p-4 rounded-xl font-bold text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-mug-hot text-xs"></i> Kelola Tempat
+                </a>
+                <a href="/tempat/tambah" class="flex items-center justify-center gap-2 bg-gray-50 hover:bg-amber-500 border border-gray-100 hover:border-amber-500 text-gray-700 hover:text-white p-4 rounded-xl font-bold text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-plus text-xs"></i> Tambah Tempat
+                </a>
+                <a href="/event" class="flex items-center justify-center gap-2 bg-gray-50 hover:bg-amber-500 border border-gray-100 hover:border-amber-500 text-gray-700 hover:text-white p-4 rounded-xl font-bold text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-calendar text-xs"></i> Lihat Event
+                </a>
+                <a href="/event/tambah" class="flex items-center justify-center gap-2 bg-gray-50 hover:bg-amber-500 border border-gray-100 hover:border-amber-500 text-gray-700 hover:text-white p-4 rounded-xl font-bold text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-calendar-plus text-xs"></i> Buat Event Baru
+                </a>
+                <a href="/favorit" class="flex items-center justify-center gap-2 bg-gray-50 hover:bg-amber-500 border border-gray-100 hover:border-amber-500 text-gray-700 hover:text-white p-4 rounded-xl font-bold text-sm transition-all shadow-sm">
+                    <i class="fa-solid fa-heart text-xs"></i> List Favoritku
+                </a>
+            </div>
+        </div>
 
-        &nbsp;
+    </main>
 
-        <a class="btn" href="/favorit">
-            ❤️ Favorit Saya
-        </a>
-
-        &nbsp;
-
-        <a class="btn" href="/event">
-            🎉 Kelola Event
-        </a>
-
-    </div>
-
-</div>
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
+            &copy; 2026 NongkrongFinder. All rights reserved.
+        </div>
+    </footer>
 
 </body>
 </html>
